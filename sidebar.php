@@ -55,7 +55,11 @@
 </head><!--/head-->
 <body>
      
+<<<<<<< HEAD
                 <div class="col-md-3 sidebar" >
+=======
+                <div class="col-md-3 sidebar">
+>>>>>>> 658accc627e015dbd10fca81f008cb49f019cb69
 
      
   <h3>Get Call Back..!!</h3> 
