@@ -183,12 +183,10 @@
                                 <i class="icon-group icon-md"></i>
                             </div>
                             <div class="media-body">
-<<<<<<< HEAD
+
                                 <!-- <a href="online_register.php" target="blank"><h3 class="media-heading">Online Registration for LIC Agent and LIC D.O. </h3> </a> -->
                                 <a href="online_register.php"><h3 class="media-heading">Online<br>Registration</h3> </a>
-=======
-                                <a href="online_register.php" target="blank"><h3 class="media-heading">Online Registration for LIC Agent and LIC D.O. </h3> </a>
->>>>>>> 658accc627e015dbd10fca81f008cb49f019cb69
+
                             </div>
                         </div>
                     </div><!--/.col-md-4-->
