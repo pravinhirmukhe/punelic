@@ -44,14 +44,14 @@
 <!-- datepicker -->
 <script type="text/javascript">
     $(document).ready(function () {
-        $(document).ready(function () {
-            $('input[type=text]').keydown(function () {
-                $(this).val($(this).val().toUpperCase());
-            });
-            $('input[type=text]').focusout(function () {
-                $(this).val($(this).val().toUpperCase());
-            });
-        });
+//        $(document).ready(function () {
+//            $('input[type=text]').keydown(function () {
+//                $(this).val($(this).val().toUpperCase());
+//            });
+//            $('input[type=text]').focusout(function () {
+//                $(this).val($(this).val().toUpperCase());
+//            });
+//        });
         $('.date-range').daterangepicker({format: 'DD/MM/YYYY', }, null, function (start, end, label) {
             console.log(start.toISOString(), end.toISOString(), label);
         });

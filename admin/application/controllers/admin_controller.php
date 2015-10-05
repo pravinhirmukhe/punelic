@@ -36,6 +36,10 @@ class admin_controller extends MY_Controller {
         $this->admin_layout($data);
     }
 
+    public function listprof() {
+        echo json_encode($this->admin_model->listprof());
+    }
+
     public function admin_changepass() {
         $data = $this->get_angluar();
         $rs = $this->admin_model->admin_changepass($data);
@@ -153,6 +157,19 @@ class admin_controller extends MY_Controller {
             'totalprofOnline' => $this->admin_model->totalprofOnline()
         );
         echo json_encode($data);
+    }
+
+    public function getProfApproveId() {
+        $data = $this->get_angluar();
+        $prof = $this->admin_model->getProfApproveId($data['id']);
+//        $msg = $this->load->view('admin/email/professional_activate', $prof['mail'], true);
+//        $this->sendMail($prof['mail']['username'], 'Successful acceptance of form by Registrar LACACO', $msg);
+        if (empty($prof['mail'])) {
+            $prof['mail'] = false;
+            echo json_encode($prof);
+        } else {
+            echo json_encode($prof);
+        }
     }
 
     public function login() {

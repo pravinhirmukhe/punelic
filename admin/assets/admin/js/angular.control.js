@@ -1871,7 +1871,7 @@ app.controller('prof_list', ['$scope', '$rootScope', 'filterFilter', '$http', fu
         $scope.proflist = [];
         $scope.profdata = [];
         $rootScope.loading = 1;
-        $http.get(site_url + 'admin/listprof').success(function (data) {
+        $http.get(site_url + 'admin_controller/listprof').success(function (data) {
             $scope.proflist = data;
             $rootScope.loading = 0;
             $scope.currentPage = 1;
@@ -1900,7 +1900,7 @@ app.controller('prof_list', ['$scope', '$rootScope', 'filterFilter', '$http', fu
             var i = confirm('Are You sure to change status of professional.');
             if (i) {
                 $rootScope.loading = 1;
-                $http.post(site_url + "admin/getProfApproveId", data).success(function (d) {
+                $http.post(site_url + "admin_controller/getProfApproveId", data).success(function (d) {
                     var dt = d.result;
                     if (d.mail) {
                         var sms = {

@@ -208,4 +208,34 @@ class admin_model extends CI_Model {
         return $this->db->get('register')->num_rows();
     }
 
+    public function listprof() {
+        $this->db->select('`id`,`type`,`status`,`fname`,`mname`,`lname`,`agent_code`,`email`');
+        return $this->db->get('Agent_tbl')->result();
+    }
+
+    public function getProfApproveId($id) {
+        $status1 = $this->db->select('status')->from('Agent_tbl')->where('id', $id)->get()->row()->status;
+        $status = ($status1 == 'Active') ? 'Deactive' : 'Active';
+        $r = $this->db->update('Agent_tbl', array('status' => $status), array('id' => $id));
+//        echo $this->db->last_query();
+//        $data['mob'] = $r['mob'];
+
+        if ($r) {
+            if ($status == 'Active') {
+//                $prof = $this->db->select('txt_Email as email, txt_MobileNo')->from('register')->where('id', $id)->get()->row();
+//                $data['username'] = $prof->email;
+//                $data['pass'] = random_string('numeric', 8);
+//                $data['mob'] = $prof->txt_MobileNo;
+//                $this->db->update('register', array('pass' => md5($data['pass'])), array('id' => $id));
+
+                return array('mail' => "", 'result' => $this->listprof());
+            } else {
+                return array('mail' => 0, 'result' => $this->listprof());
+            }
+
+//            return true;
+        }
+//        die();
+    }
+
 }
