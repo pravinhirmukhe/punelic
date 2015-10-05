@@ -14,7 +14,6 @@ class MYPDF extends TCPDF {
 //        // Title
 //        $this->Cell(0, 15, '<< TCPDF Example 003 >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
 //    }
-
     // Page footer
     public function Footer() {
         // Position at 15 mm from bottom

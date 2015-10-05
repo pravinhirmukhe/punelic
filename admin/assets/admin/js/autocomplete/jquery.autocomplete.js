@@ -1,11 +1,11 @@
 /**
-*  Ajax Autocomplete for jQuery, version 1.2.9
-*  (c) 2013 Tomas Kirda
-*
-*  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
-*  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
-*
-*/
+ *  Ajax Autocomplete for jQuery, version 1.2.9
+ *  (c) 2013 Tomas Kirda
+ *
+ *  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
+ *  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
+ *
+ */
 
 /*jslint  browser: true, white: true, plusplus: true */
 /*global define, window, document, jQuery */
@@ -24,67 +24,67 @@
     'use strict';
 
     var
-        utils = (function () {
-            return {
-                escapeRegExChars: function (value) {
-                    return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-                },
-                createNode: function (containerClass) {
-                    var div = document.createElement('div');
-                    div.className = containerClass;
-                    div.style.position = 'absolute';
-                    div.style.display = 'none';
-                    return div;
-                }
+            utils = (function () {
+                return {
+                    escapeRegExChars: function (value) {
+                        return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+                    },
+                    createNode: function (containerClass) {
+                        var div = document.createElement('div');
+                        div.className = containerClass;
+                        div.style.position = 'absolute';
+                        div.style.display = 'none';
+                        return div;
+                    }
+                };
+            }()),
+            keys = {
+                ESC: 27,
+                TAB: 9,
+                RETURN: 13,
+                LEFT: 37,
+                UP: 38,
+                RIGHT: 39,
+                DOWN: 40
             };
-        }()),
-
-        keys = {
-            ESC: 27,
-            TAB: 9,
-            RETURN: 13,
-            LEFT: 37,
-            UP: 38,
-            RIGHT: 39,
-            DOWN: 40
-        };
 
     function Autocomplete(el, options) {
-        var noop = function () { },
-            that = this,
-            defaults = {
-                autoSelectFirst: false,
-                appendTo: 'body',
-                serviceUrl: null,
-                lookup: null,
-                onSelect: null,
-                width: 'auto',
-                minChars: 1,
-                maxHeight: 300,
-                deferRequestBy: 0,
-                params: {},
-                formatResult: Autocomplete.formatResult,
-                delimiter: null,
-                zIndex: 9999,
-                type: 'GET',
-                noCache: false,
-                onSearchStart: noop,
-                onSearchComplete: noop,
-                onSearchError: noop,
-                containerClass: 'autocomplete-suggestions',
-                tabDisabled: false,
-                dataType: 'text',
-                currentRequest: null,
-                triggerSelectOnValidInput: true,
-                preventBadQueries: true,
-                lookupFilter: function (suggestion, originalQuery, queryLowerCase) {
-                    return suggestion.value.toLowerCase().indexOf(queryLowerCase) !== -1;
-                },
-                paramName: 'query',
-                transformResult: function (response) {
-                    return typeof response === 'string' ? $.parseJSON(response) : response;
-                }
-            };
+        var noop = function () {
+        },
+                that = this,
+                defaults = {
+                    autoSelectFirst: false,
+                    appendTo: 'body',
+                    serviceUrl: null,
+                    lookup: null,
+                    onSelect: null,
+                    width: 'auto',
+                    minChars: 1,
+                    maxHeight: 300,
+                    deferRequestBy: 0,
+                    params: {},
+                    formatResult: Autocomplete.formatResult,
+                    delimiter: null,
+                    zIndex: 9999,
+                    type: 'GET',
+                    noCache: false,
+                    onSearchStart: noop,
+                    onSearchComplete: noop,
+                    onSearchError: noop,
+                    containerClass: 'autocomplete-suggestions',
+                    tabDisabled: false,
+                    dataType: 'text',
+                    currentRequest: null,
+                    triggerSelectOnValidInput: true,
+                    preventBadQueries: true,
+                    lookupFilter: function (suggestion, originalQuery, queryLowerCase) {
+                        return suggestion.value.toLowerCase().indexOf(queryLowerCase) !== -1;
+                    },
+                    paramName: 'query',
+                    transformResult: function (response) {
+                        return typeof response === 'string' ? $.parseJSON(response) : response;
+                    }
+                };
 
         // Shared variables:
         that.element = el;
@@ -124,15 +124,13 @@
     };
 
     Autocomplete.prototype = {
-
         killerFn: null,
-
         initialize: function () {
             var that = this,
-                suggestionSelector = '.' + that.classes.suggestion,
-                selected = that.classes.selected,
-                options = that.options,
-                container;
+                    suggestionSelector = '.' + that.classes.suggestion,
+                    selected = that.classes.selected,
+                    options = that.options,
+                    container;
 
             // Remove autocomplete attribute to prevent native suggestions:
             that.element.setAttribute('autocomplete', 'off');
@@ -181,13 +179,22 @@
 
             $(window).on('resize.autocomplete', that.fixPositionCapture);
 
-            that.el.on('keydown.autocomplete', function (e) { that.onKeyPress(e); });
-            that.el.on('keyup.autocomplete', function (e) { that.onKeyUp(e); });
-            that.el.on('blur.autocomplete', function () { that.onBlur(); });
-            that.el.on('focus.autocomplete', function () { that.onFocus(); });
-            that.el.on('change.autocomplete', function (e) { that.onKeyUp(e); });
+            that.el.on('keydown.autocomplete', function (e) {
+                that.onKeyPress(e);
+            });
+            that.el.on('keyup.autocomplete', function (e) {
+                that.onKeyUp(e);
+            });
+            that.el.on('blur.autocomplete', function () {
+                that.onBlur();
+            });
+            that.el.on('focus.autocomplete', function () {
+                that.onFocus();
+            });
+            that.el.on('change.autocomplete', function (e) {
+                that.onKeyUp(e);
+            });
         },
-
         onFocus: function () {
             var that = this;
             that.fixPosition();
@@ -195,14 +202,12 @@
                 that.onValueChange();
             }
         },
-
         onBlur: function () {
             this.enableKillerFn();
         },
-
         setOptions: function (suppliedOptions) {
             var that = this,
-                options = that.options;
+                    options = that.options;
 
             $.extend(options, suppliedOptions);
 
@@ -219,18 +224,15 @@
                 'z-index': options.zIndex
             });
         },
-
         clearCache: function () {
             this.cachedResponse = {};
             this.badQueries = [];
         },
-
         clear: function () {
             this.clearCache();
             this.currentValue = '';
             this.suggestions = [];
         },
-
         disable: function () {
             var that = this;
             that.disabled = true;
@@ -238,15 +240,13 @@
                 that.currentRequest.abort();
             }
         },
-
         enable: function () {
             this.disabled = false;
         },
-
         fixPosition: function () {
             var that = this,
-                offset,
-                styles;
+                    offset,
+                    styles;
 
             // Don't adjsut position if custom container has been specified:
             if (that.options.appendTo !== 'body') {
@@ -266,17 +266,14 @@
 
             $(that.suggestionsContainer).css(styles);
         },
-
         enableKillerFn: function () {
             var that = this;
             $(document).on('click.autocomplete', that.killerFn);
         },
-
         disableKillerFn: function () {
             var that = this;
             $(document).off('click.autocomplete', that.killerFn);
         },
-
         killSuggestions: function () {
             var that = this;
             that.stopKillSuggestions();
@@ -285,16 +282,14 @@
                 that.stopKillSuggestions();
             }, 50);
         },
-
         stopKillSuggestions: function () {
             window.clearInterval(this.intervalId);
         },
-
         isCursorAtEnd: function () {
             var that = this,
-                valLength = that.el.val().length,
-                selectionStart = that.element.selectionStart,
-                range;
+                    valLength = that.el.val().length,
+                    selectionStart = that.element.selectionStart,
+                    range;
 
             if (typeof selectionStart === 'number') {
                 return selectionStart === valLength;
@@ -306,7 +301,6 @@
             }
             return true;
         },
-
         onKeyPress: function (e) {
             var that = this;
 
@@ -361,7 +355,6 @@
             e.stopImmediatePropagation();
             e.preventDefault();
         },
-
         onKeyUp: function (e) {
             var that = this;
 
@@ -389,13 +382,12 @@
                 }
             }
         },
-
         onValueChange: function () {
             var that = this,
-                options = that.options,
-                value = that.el.val(),
-                query = that.getQuery(value),
-                index;
+                    options = that.options,
+                    value = that.el.val(),
+                    query = that.getQuery(value),
+                    index;
 
             if (that.selection) {
                 that.selection = null;
@@ -421,11 +413,10 @@
                 that.getSuggestions(query);
             }
         },
-
         findSuggestionIndex: function (query) {
             var that = this,
-                index = -1,
-                queryLowerCase = query.toLowerCase();
+                    index = -1,
+                    queryLowerCase = query.toLowerCase();
 
             $.each(that.suggestions, function (i, suggestion) {
                 if (suggestion.value.toLowerCase() === queryLowerCase) {
@@ -436,10 +427,9 @@
 
             return index;
         },
-
         getQuery: function (value) {
             var delimiter = this.options.delimiter,
-                parts;
+                    parts;
 
             if (!delimiter) {
                 return value;
@@ -447,14 +437,13 @@
             parts = value.split(delimiter);
             return $.trim(parts[parts.length - 1]);
         },
-
         getSuggestionsLocal: function (query) {
             var that = this,
-                options = that.options,
-                queryLowerCase = query.toLowerCase(),
-                filter = options.lookupFilter,
-                limit = parseInt(options.lookupLimit, 10),
-                data;
+                    options = that.options,
+                    queryLowerCase = query.toLowerCase(),
+                    filter = options.lookupFilter,
+                    limit = parseInt(options.lookupLimit, 10),
+                    data;
 
             data = {
                 suggestions: $.grep(options.lookup, function (suggestion) {
@@ -468,14 +457,13 @@
 
             return data;
         },
-
         getSuggestions: function (q) {
             var response,
-                that = this,
-                options = that.options,
-                serviceUrl = options.serviceUrl,
-                params,
-                cacheKey;
+                    that = this,
+                    options = that.options,
+                    serviceUrl = options.serviceUrl,
+                    params,
+                    cacheKey;
 
             options.params[options.paramName] = q;
             params = options.ignoreParams ? null : options.params;
@@ -516,14 +504,13 @@
                 });
             }
         },
-
         isBadQuery: function (q) {
-            if (!this.options.preventBadQueries){
+            if (!this.options.preventBadQueries) {
                 return false;
             }
 
             var badQueries = this.badQueries,
-                i = badQueries.length;
+                    i = badQueries.length;
 
             while (i--) {
                 if (q.indexOf(badQueries[i]) === 0) {
@@ -533,7 +520,6 @@
 
             return false;
         },
-
         hide: function () {
             var that = this;
             that.visible = false;
@@ -541,7 +527,6 @@
             $(that.suggestionsContainer).hide();
             that.signalHint(null);
         },
-
         suggest: function () {
             if (this.suggestions.length === 0) {
                 this.hide();
@@ -549,16 +534,16 @@
             }
 
             var that = this,
-                options = that.options,
-                formatResult = options.formatResult,
-                value = that.getQuery(that.currentValue),
-                className = that.classes.suggestion,
-                classSelected = that.classes.selected,
-                container = $(that.suggestionsContainer),
-                beforeRender = options.beforeRender,
-                html = '',
-                index,
-                width;
+                    options = that.options,
+                    formatResult = options.formatResult,
+                    value = that.getQuery(that.currentValue),
+                    className = that.classes.suggestion,
+                    classSelected = that.classes.selected,
+                    container = $(that.suggestionsContainer),
+                    beforeRender = options.beforeRender,
+                    html = '',
+                    index,
+                    width;
 
             if (options.triggerSelectOnValidInput) {
                 index = that.findSuggestionIndex(value);
@@ -599,11 +584,10 @@
 
             that.findBestHint();
         },
-
         findBestHint: function () {
             var that = this,
-                value = that.el.val().toLowerCase(),
-                bestMatch = null;
+                    value = that.el.val().toLowerCase(),
+                    bestMatch = null;
 
             if (!value) {
                 return;
@@ -619,10 +603,9 @@
 
             that.signalHint(bestMatch);
         },
-
         signalHint: function (suggestion) {
             var hintValue = '',
-                that = this;
+                    that = this;
             if (suggestion) {
                 hintValue = that.currentValue + suggestion.value.substr(that.currentValue.length);
             }
@@ -632,21 +615,19 @@
                 (this.options.onHint || $.noop)(hintValue);
             }
         },
-
         verifySuggestionsFormat: function (suggestions) {
             // If suggestions is string array, convert them to supported format:
             if (suggestions.length && typeof suggestions[0] === 'string') {
                 return $.map(suggestions, function (value) {
-                    return { value: value, data: null };
+                    return {value: value, data: null};
                 });
             }
 
             return suggestions;
         },
-
         processResponse: function (result, originalQuery, cacheKey) {
             var that = this,
-                options = that.options;
+                    options = that.options;
 
             result.suggestions = that.verifySuggestionsFormat(result.suggestions);
 
@@ -666,13 +647,12 @@
             that.suggestions = result.suggestions;
             that.suggest();
         },
-
         activate: function (index) {
             var that = this,
-                activeItem,
-                selected = that.classes.selected,
-                container = $(that.suggestionsContainer),
-                children = container.children();
+                    activeItem,
+                    selected = that.classes.selected,
+                    container = $(that.suggestionsContainer),
+                    children = container.children();
 
             container.children('.' + selected).removeClass(selected);
 
@@ -686,20 +666,17 @@
 
             return null;
         },
-
         selectHint: function () {
             var that = this,
-                i = $.inArray(that.hint, that.suggestions);
+                    i = $.inArray(that.hint, that.suggestions);
 
             that.select(i);
         },
-
         select: function (i) {
             var that = this;
             that.hide();
             that.onSelect(i);
         },
-
         moveUp: function () {
             var that = this;
 
@@ -717,7 +694,6 @@
 
             that.adjustScroll(that.selectedIndex - 1);
         },
-
         moveDown: function () {
             var that = this;
 
@@ -727,14 +703,13 @@
 
             that.adjustScroll(that.selectedIndex + 1);
         },
-
         adjustScroll: function (index) {
             var that = this,
-                activeItem = that.activate(index),
-                offsetTop,
-                upperBound,
-                lowerBound,
-                heightDelta = 25;
+                    activeItem = that.activate(index),
+                    offsetTop,
+                    upperBound,
+                    lowerBound,
+                    heightDelta = 25;
 
             if (!activeItem) {
                 return;
@@ -753,11 +728,10 @@
             that.el.val(that.getValue(that.suggestions[index].value));
             that.signalHint(null);
         },
-
         onSelect: function (index) {
             var that = this,
-                onSelectCallback = that.options.onSelect,
-                suggestion = that.suggestions[index];
+                    onSelectCallback = that.options.onSelect,
+                    suggestion = that.suggestions[index];
 
             that.currentValue = that.getValue(suggestion.value);
 
@@ -773,12 +747,11 @@
                 onSelectCallback.call(that.element, suggestion);
             }
         },
-
         getValue: function (value) {
             var that = this,
-                delimiter = that.options.delimiter,
-                currentValue,
-                parts;
+                    delimiter = that.options.delimiter,
+                    currentValue,
+                    parts;
 
             if (!delimiter) {
                 return value;
@@ -793,7 +766,6 @@
 
             return currentValue.substr(0, currentValue.length - parts[parts.length - 1].length) + value;
         },
-
         dispose: function () {
             var that = this;
             that.el.off('.autocomplete').removeData('autocomplete');
@@ -814,7 +786,7 @@
 
         return this.each(function () {
             var inputElement = $(this),
-                instance = inputElement.data(dataKey);
+                    instance = inputElement.data(dataKey);
 
             if (typeof options === 'string') {
                 if (instance && typeof instance[options] === 'function') {

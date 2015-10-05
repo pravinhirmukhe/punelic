@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="x_content">
                                     <span class="">Per Page :
-                                        <select ng-model="per" ng-init="per=30" ng-change="perpage(per)">
+                                        <select ng-model="per" ng-init="per = 30" ng-change="perpage(per)">
                                             <option value="30">30</option>
                                             <option value="60">60</option>
                                             <option value="120">120</option>
@@ -79,7 +79,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="even pointer" ng-repeat="obj in  filtered = exe_date_report1 | filter:search | startFrom:(currentPage - 1) * entryLimit | limitTo:entryLimit">
+                                            <tr class="even pointer" ng-repeat="obj in  filtered = exe_date_report1| filter:search | startFrom:(currentPage - 1) * entryLimit | limitTo:entryLimit">
     <!--                                                <td class="a-center ">
                                                     <input type="checkbox" class="tableflat">
                                                 </td> -->
@@ -94,16 +94,16 @@
                                                 <td colspan="5" class="alert alert-danger">Record not found.</td>
                                             </tr>
 
-                                                                                                                                                                <!--	<tr class="even pointer" ng-repeat="obj in  filtered = exe_date_report1 | filter:search | startFrom:(currentPage - 1) * entryLimit | limitTo:entryLimit">
-                                                                                                                                                                <td class="a-center ">
+                                                                                                                                                                        <!--	<tr class="even pointer" ng-repeat="obj in  filtered = exe_date_report1 | filter:search | startFrom:(currentPage - 1) * entryLimit | limitTo:entryLimit">
+                                                                                                                                                                        <td class="a-center ">
 
-                                                                                                                                                                </td>
+                                                                                                                                                                        </td>
                                             <?php $total = count(obj . formno); ?>
-                                                                                                                                                                        
-                                                                                                                                                                <td class=" "></td>
-                                                                                                                                                                <td class="" style="float: right;">Total Count :</td>
-                                                                                                                                                                <td class=" "><?php echo $total; ?></td>
-                                                                                                                                                                </tr>-->
+                                                                                                                                                                                
+                                                                                                                                                                        <td class=" "></td>
+                                                                                                                                                                        <td class="" style="float: right;">Total Count :</td>
+                                                                                                                                                                        <td class=" "><?php echo $total; ?></td>
+                                                                                                                                                                        </tr>-->
                                         </tbody>
                                     </table>
                                     <pagination total-items="totalItems" ng-model="currentPage" max-size="noOfPages" class="pagination-sm pull-right" boundary-links="true" items-per-page="entryLimit"></pagination>

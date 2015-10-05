@@ -178,10 +178,10 @@
 <script type="text/javascript" src="admin/assets/admin/js/jquery.min.js"></script>
 <script type="text/javascript" src="admin/assets/admin/js/fileinput.min.js"></script>
 <script>
-    $(".file").fileinput({
-        allowedFileExtensions: ['jpg', 'png', 'gif'],
-        maxFileSize: 200
-    });
+                                                    $(".file").fileinput({
+                                                        allowedFileExtensions: ['jpg', 'png', 'gif'],
+                                                        maxFileSize: 200
+                                                    });
 </script>
 <?php
 session_destroy();

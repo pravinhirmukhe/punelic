@@ -35,11 +35,12 @@ $query_parent = mysql_query("SELECT DISTINCT Branch from Officer_tbl order by Br
                         <div class="row">
                             <div class="col-md-3">
                                 <select class="form-control" name="parent_cat" id="parent_cat"><option>------Select Branch-------</option>
-                                    <?php include 'config.php';
+                                    <?php
+                                    include 'config.php';
                                     while ($row = mysql_fetch_array($query_parent)):
                                         ?>
                                         <option ><?php echo $row['Branch']; ?></option>
-<?php endwhile; ?>
+                                    <?php endwhile; ?>
                                 </select>
                             </div>
                             <div class="col-md-3">

@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="x_content" >
                                         <span class="">Per Page :
-                                        <!-- ng-model="per" ng-init="per=30" ng-change="perpage(per)" -->
+                                            <!-- ng-model="per" ng-init="per=30" ng-change="perpage(per)" -->
                                             <select >
                                                 <option value="30">30</option>
                                                 <option value="60">60</option>
@@ -102,10 +102,10 @@
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
-                                            
+
                                             <tbody>
                                                 <tr class="even pointer" >
-                                                    
+
                                                     <td class=" ">1212</td>
                                                     <td class=" ">XYZ</td>
                                                     <td class=" ">1234567890</td>

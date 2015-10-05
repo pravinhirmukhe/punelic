@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<?php ob_start();
+<?php
+ob_start();
 session_start();
-           include('config.php');
-           include './secure.php';
-    $query_parent1 = mysql_query("SELECT DISTINCT Id,Branch from Officer_tbl") or die("Query failed: ".mysql_error());
- 
+include('config.php');
+include './secure.php';
+$query_parent1 = mysql_query("SELECT DISTINCT Id,Branch from Officer_tbl") or die("Query failed: " . mysql_error());
 ?>
 
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Home | Flat Theme</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Home | Flat Theme</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/prettyPhoto.css" rel="stylesheet">
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->       
+        <link rel="shortcut icon" href="images/ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     </script>
-  
+
 </head><!--/head-->
 <body>
-    
+
     <?php include 'header.php'; ?>
 
-     <section id="services" class="emerald">
+    <section id="services" class="emerald">
         <div class="container" style="padding-top:1%;">
             <div class="row">
                 <div class="col-md-9 col-sm-6">
@@ -49,60 +49,62 @@ session_start();
         </div>
     </section><!--/#services-->
 
-<div class="container" style="padding-top:3%;">
-<div class="row">
+    <div class="container" style="padding-top:3%;">
+        <div class="row">
 
-<form action="" method="POST">
-     
-<div class="col-md-9 sidebar"> 
-                   
-                <h4><b>Select Branch</b></h4>
-<div class="col-md-3">
-    <select class="form-control" name="parent_cat" id="parent_cat"><option>------Select Branch-------</option>
-    <?php include 'config.php'; while($row6 = mysql_fetch_array($query_parent1)): ?>
-    <option value="<?php echo $row6['Id']; ?>"><?php echo $row6['Branch']; ?></option>
-    <?php endwhile; ?>
-    </select>
+            <form action="" method="POST">
 
-</div>
-<div class="col-md-3">
+                <div class="col-md-9 sidebar"> 
 
-     <input type="submit" name="btnSubmit" value="Search" class="btn btn-primary btn-large pull-center"/>
-     <br><br>
-    
-   
-</div>
+                    <h4><b>Select Branch</b></h4>
+                    <div class="col-md-3">
+                        <select class="form-control" name="parent_cat" id="parent_cat"><option>------Select Branch-------</option>
+                            <?php include 'config.php';
+                            while ($row6 = mysql_fetch_array($query_parent1)):
+                                ?>
+                                <option value="<?php echo $row6['Id']; ?>"><?php echo $row6['Branch']; ?></option>
+<?php endwhile; ?>
+                        </select>
 
-<br><br><br><br> 
+                    </div>
+                    <div class="col-md-3">
 
-    <div>
-    <?php if(isset($_POST['btnSubmit']))
-    {
-    echo"<div><table class='table' border='1px' width='auto'><tr><td><b><center>ID</center><td><b><center>Name</center></b></td><td width='auto'><b><center>Contact Number</center></b></td><td width='auto'><b><center>Branch</center></b></td></tr>";
-    $q=mysql_query("select * from Officer_tbl where Id='".$_POST['parent_cat']."'");
-    while($r1 = mysql_fetch_array($q))
-    {
-           echo"<tr><td><a href='UpdateDO.php?id=".$r1['Id']."'>Update  </a>".$r1['Id']." </td><td>".$r1['Name']."</td><td>".$r1['Contact']."</td><td>".$r1['Branch']."</td></tr>";
-    }
-    echo"</table></div>";
-    }//if?>
-
-    </div> 
-
-    </div> 
-
-</form>
- 
-
-                <?php include 'sidebar.php'; ?>
-
-            </div><!--/.row-->
-        </div>
-     
+                        <input type="submit" name="btnSubmit" value="Search" class="btn btn-primary btn-large pull-center"/>
+                        <br><br>
 
 
+                    </div>
 
-    <?php include 'footer.php'; ?>
+                    <br><br><br><br> 
+
+                    <div>
+                        <?php
+                        if (isset($_POST['btnSubmit'])) {
+                            echo"<div><table class='table' border='1px' width='auto'><tr><td><b><center>ID</center><td><b><center>Name</center></b></td><td width='auto'><b><center>Contact Number</center></b></td><td width='auto'><b><center>Branch</center></b></td></tr>";
+                            $q = mysql_query("select * from Officer_tbl where Id='" . $_POST['parent_cat'] . "'");
+                            while ($r1 = mysql_fetch_array($q)) {
+                                echo"<tr><td><a href='UpdateDO.php?id=" . $r1['Id'] . "'>Update  </a>" . $r1['Id'] . " </td><td>" . $r1['Name'] . "</td><td>" . $r1['Contact'] . "</td><td>" . $r1['Branch'] . "</td></tr>";
+                            }
+                            echo"</table></div>";
+                        }//if
+                        ?>
+
+                    </div> 
+
+                </div> 
+
+            </form>
+
+
+<?php include 'sidebar.php'; ?>
+
+        </div><!--/.row-->
+    </div>
+
+
+
+
+<?php include 'footer.php'; ?>
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
