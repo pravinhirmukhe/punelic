@@ -209,7 +209,7 @@ class admin_model extends CI_Model {
     }
 
     public function listprof() {
-        $this->db->select('`id`,`type`,`status`,`fname`,`mname`,`lname`,`agent_code`,`email`');
+        $this->db->select('`idpravin`,`type`,`status`,`fname`,`mname`,`lname`,`agent_code`,`email`');
         return $this->db->get('Agent_tbl')->result();
     }
 
