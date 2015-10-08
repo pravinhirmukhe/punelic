@@ -1,6 +1,11 @@
 <?php
 ob_start();
 include('config.php');
+
+if($_GET['id'] != "")
+{
+	$agent_data = mysql_query("SELECT * from Agent_tbl Where id = ".$_GET['id']." AND type = 'DO'") or die("Query failed: " . mysql_error());
+}
 ?>
 
 <?php include 'header.php'; ?>
@@ -29,6 +34,9 @@ include('config.php');
                             <h2 align="left"><b>LIC Do Details</b></h2>
                             <!-- <form action="" method="POST"><input type="submit" name="btnBack" value="Back" class="btn btn-primary btn-large pull-right"/></form> -->
                         </div><hr>
+                        <?php if(isset($agent_data )) {
+						while ($row_agt = mysql_fetch_array($agent_data)): ?>
+						
                         <div class="row">    
                             <div class="list-group" style="box-shadow: 0 2px 4px 3px #e3e3e3;">
                                 <div class="list-group-item">
@@ -39,56 +47,58 @@ include('config.php');
                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                             <ul>
                                                 <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                    <span class=""><h4>First Middle Last</h4></span>
+                                                    <span class=""><h4><?php echo $row_agt['fname']." ".$row_agt['mname']." ".$row_agt['lname']; ?></h4></span>
                                                 </li>
                                             </ul>
                                             <div class="col-md-5 col-sm-9 col-xs-12">
                                                 <ul>
                                                     <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                        <span class=""><i class="fa fa-certificate"></i><b>Agent Code:</b> 17495986</span>
+                                                        <span class=""><i class="fa fa-certificate"></i><b>Agent Code:</b> <?php echo $row_agt['agent_code']; ?></span>
                                                     </li>
                                                     <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                        <span class=""><i class="fa fa-inr"></i><b>Club Membership :</b> NA</span>
+                                                        <span class=""><i class="fa fa-inr"></i><b>Club Membership :</b> <?php echo $row_agt['club_membership']; ?></span>
                                                     </li>
                                                     <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                        <span class=""><i class="fa fa-map-marker"></i><b>Branch :</b> Laxmi Road</span>
+                                                        <span class=""><i class="fa fa-map-marker"></i><b>Branch :</b> <?php echo $row_agt['branch']; ?></span>
                                                     </li>
                                                     <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                        <span class=""><i class="fa fa-map-marker"></i><b>Division :</b> Pune Division 2</span>
+                                                        <span class=""><i class="fa fa-map-marker"></i><b>Division :</b> <?php echo $row_agt['division']; ?></span>
                                                     </li>
                                                     <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                        <span class=""><i class="fa fa-map-marker"></i><b>Contact :</b> 9865878565</span>
+                                                        <span class=""><i class="fa fa-map-marker"></i><b>Contact :</b> <?php echo $row_agt['contact_no']; ?></span>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-6 col-sm-9 col-xs-12">
                                                 <ul>
                                                     <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                        <span class=""><i class="fa fa-thumbs-up fa-2x"></i><b>Email :</b> xyz@example.com</span>
+                                                        <span class=""><i class="fa fa-thumbs-up fa-2x"></i><b>Email :</b> <?php echo $row_agt['email']; ?></span>
                                                     </li>
                                                     <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                        <span class=""><i class="fa fa-thumbs-up fa-2x"></i><b>Area :</b> Ambegaon</span>
+                                                        <span class=""><i class="fa fa-thumbs-up fa-2x"></i><b>Area :</b> <?php echo $row_agt['area']; ?></span>
                                                     </li>
                                                     <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                        <span class=""><i class="fa fa-thumbs-up fa-2x"></i><b>Agency Since :</b> 2010</span>
+                                                        <span class=""><i class="fa fa-thumbs-up fa-2x"></i><b>Agency Since :</b> <?php echo $row_agt['agency_since']; ?></span>
                                                     </li>
                                                     <li class="" style="padding-bottom: 5px;list-style: none;">
-                                                        <span class=""><i class="fa fa-thumbs-up fa-2x"></i><b>Other Business :</b> LIC Premium Point, General insurance, Mutual Fund.</span>
+                                                        <span class=""><i class="fa fa-thumbs-up fa-2x"></i><b>Other Business :</b> <?php echo $row_agt['oth_busi']; ?></span>
                                                     </li>
                                                 </ul>
                                             </div>
 
                                         </div>
                                         <hr>
-                                        <!-- <div class="row"> -->
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <!-- <div class="row"> -->                                        
+                                    </div>
+                                    <div class="row">
+                                    	<div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="table-responsive">
                                                 <table class="table table-bordered">
                                                     <tr>
                                                         <td><b>Office Address:</b> </td>
-                                                        <td>A2/101 spring meadows,Near Amit Blow Field Nahre Road Ambegaon Pune 411046</td>
+                                                        <td><?php echo $row_agt['office_add']; ?></td>
                                                         <td><b>Residence Address:</b> </td>
-                                                        <td>A2/101 spring meadows,Near Amit Blow Field Nahre Road Ambegaon Pune 411046</td>
+                                                        <td><?php echo $row_agt['resi_add']; ?></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -98,6 +108,7 @@ include('config.php');
                             </div>
                         </div>
                     </div>
+					<?php endwhile; }?>
                     <?php include 'sidebar-do.php'; ?>
                 </div>
             </div>
